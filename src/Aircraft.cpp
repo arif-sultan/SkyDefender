@@ -5,7 +5,7 @@ Aircraft::Aircraft()
       shieldActive(false), position(375.0f, 500.0f) {
     body.setSize(sf::Vector2f(50.0f, 50.0f));
     body.setFillColor(sf::Color::Green);
-    body.setPosition(position.getX(), position.getY());
+    body.setPosition({position.getX(), position.getY()});
 }
 
 Aircraft::Aircraft(int initHealth, float initSpeed, int initLives, int initBombs, float startX, float startY)
@@ -13,7 +13,7 @@ Aircraft::Aircraft(int initHealth, float initSpeed, int initLives, int initBombs
       lives(initLives), bombs(initBombs), shieldActive(false), position(startX, startY) {
     body.setSize(sf::Vector2f(50.0f, 50.0f));
     body.setFillColor(sf::Color::Green);
-    body.setPosition(position.getX(), position.getY());
+    body.setPosition({position.getX(), position.getY()});
 }
 
 Aircraft::~Aircraft() {}
@@ -29,23 +29,23 @@ void Aircraft::move(float dirX, float dirY, float deltaTime, float windowWidth, 
     if (newY + body.getSize().y > windowHeight) newY = windowHeight - body.getSize().y;
 
     position.setPosition(newX, newY);
-    body.setPosition(position.getX(), position.getY());
+    body.setPosition({position.getX(), position.getY()});
 }
 
 void Aircraft::handleInput(float deltaTime, float windowWidth, float windowHeight) {
     float dirX = 0.0f;
     float dirY = 0.0f;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
         dirX = -1.0f;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
         dirX = 1.0f;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
         dirY = -1.0f;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
         dirY = 1.0f;
     }
 
@@ -97,7 +97,7 @@ void Aircraft::respawn(float startX, float startY) {
     health = maxHealth;
     setShield(false); // Resets both shieldActive and the 3.0f cyan outline
     position.setPosition(startX, startY);
-    body.setPosition(startX, startY);
+    body.setPosition({startX, startY});
 }
 
 void Aircraft::setShield(bool active) {
